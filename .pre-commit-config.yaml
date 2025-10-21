@@ -1,0 +1,23 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-yaml
+      - id: check-merge-conflict
+      - id: mixed-line-ending
+        args: [--fix=no]
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: forbid-submodules
+  - repo: https://github.com/JohnnyMorganz/StyLua
+    rev: v2.3.0
+    hooks:
+      - id: stylua-github
+  - repo: local
+    hooks:
+      - id: make-docs
+        name: Run `make docs`
+        entry: make docs
+        language: system
+        pass_filenames: false
+        stages: [pre-commit]
