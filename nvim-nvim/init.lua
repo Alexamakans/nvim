@@ -4,7 +4,7 @@ vim.opt.runtimepath:prepend(base_dir)
 local lsps = require("shared.lsps")
 local treesitters = require("shared.treesitters")
 
-vim.list_extend(treesitters, { "markdown", "lua" })
+vim.list_extend(treesitters, { "markdown", "lua", "yaml" })
 
 vim.list_extend(lsps, {
   {
@@ -26,6 +26,22 @@ vim.list_extend(lsps, {
           telemetry = {
             enable = false,
           },
+        },
+      },
+    },
+  },
+  {
+    tools = {
+      mason = { "prettierd", "markdownlint" },
+      formatters = {
+        by_ft = {
+          markdown = { "markdownlint" },
+          yaml = { "prettierd" },
+        },
+      },
+      linters = {
+        by_ft = {
+          markdown = { "markdownlint" },
         },
       },
     },
