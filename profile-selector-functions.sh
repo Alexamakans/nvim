@@ -19,19 +19,46 @@ _nv_list_profiles() {
   printf '%s\n' "${items[@]}"
 }
 
-# Read first non-empty line of .nvim-profile (supports "clean"/"--clean")
+# Read first non-empty line from .nvim-profile by walking up parents.
+# Returns:
+#   0 with "--clean" or profile name on stdout
+#   1 if no file found up to /
+#   non-zero if a .nvim-profile exists but is unreadable (error)
 _nv_read_local_profile() {
-  local f="$PWD/.nvim-profile" line
-  [[ -f "$f" ]] || return 1
-  while IFS= read -r line || [[ -n "$line" ]]; do
-    line="${line#"${line%%[![:space:]]*}"}"   # ltrim
-    line="${line%"${line##*[![:space:]]}"}"   # rtrim
-    [[ -n "$line" ]] || continue
-    [[ "$line" == "clean" || "$line" == "--clean" ]] && { echo "--clean"; return 0; }
-    echo "$line"
-    return 0
-  done < "$f"
-  return 1
+  local dir line f
+  # Use physical path (no symlinks) to avoid weird parent traversals
+  dir="$(pwd -P)"
+
+  while :; do
+    f="$dir/.nvim-profile"
+
+    if [[ -e "$f" ]]; then
+      # Found a candidate; require it to be a regular, readable file
+      [[ -f "$f" && -r "$f" ]] || return 2
+
+      while IFS= read -r line || [[ -n "$line" ]]; do
+        # Trim CR (for CRLF), then trim leading/trailing whitespace
+        line="${line%$'\r'}"
+        line="${line#"${line%%[![:space:]]*}"}"
+        line="${line%"${line##*[![:space:]]}"}"
+        [[ -n "$line" ]] || continue
+
+        if [[ "$line" == "clean" || "$line" == "--clean" ]]; then
+          printf '%s\n' "--clean"
+        else
+          printf '%s\n' "$line"
+        fi
+        return 0
+      done < "$f"
+
+      # File existed but had no non-empty lines
+      return 2
+    fi
+
+    # Stop at filesystem root
+    [[ "$dir" == "/" ]] && return 1
+    dir="$(dirname -- "$dir")" || return 2
+  done
 }
 
 # Marker-based guess: add/adjust to match your profile names
