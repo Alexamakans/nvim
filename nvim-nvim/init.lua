@@ -31,6 +31,9 @@ vim.list_extend(lsps, {
     },
   },
   {
+    name = "bashls",
+  },
+  {
     tools = {
       mason = { "prettierd", "markdownlint" },
       formatters = {
