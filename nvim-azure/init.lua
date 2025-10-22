@@ -4,8 +4,6 @@ vim.opt.runtimepath:prepend(base_dir)
 local lsps = require("shared.lsps")
 local treesitters = require("shared.treesitters")
 
-local lint_parser_ok, lint_parser = pcall(require, "lint.parser")
-
 vim.list_extend(treesitters, { "yaml", "json", "bicep", "powershell", "bash" })
 
 vim.list_extend(lsps, {
