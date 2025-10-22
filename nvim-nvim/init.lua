@@ -4,7 +4,7 @@ vim.opt.runtimepath:prepend(base_dir)
 local lsps = require("shared.lsps")
 local treesitters = require("shared.treesitters")
 
-vim.list_extend(treesitters, { "markdown", "lua", "yaml" })
+vim.list_extend(treesitters, { "markdown", "lua", "yaml", "make", "bash" })
 
 vim.list_extend(lsps, {
   {
