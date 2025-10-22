@@ -66,7 +66,7 @@ _nv_guess_profile_from_markers() {
   local dir=${1:-$PWD}
   # map: suffix -> space-separated markers (files/dirs)
   declare -A markers=(
-    [python]="pyproject.toml requirements.txt Pipfile poetry.lock .venv venv"
+    [python]="pyproject.toml requirements.txt Pipfile poetry.lock uv.lock .venv venv"
     [golang]="go.mod go.sum"
     [rust]="Cargo.toml"
     [node]="package.json pnpm-lock.yaml yarn.lock"
