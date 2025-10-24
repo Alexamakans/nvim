@@ -5,24 +5,24 @@
   (block_mapping_pair
     key: (flow_node) @task_key
     value: (_))
-  (#eq? @task_key "task")
+  (#match? @task_key "[tT][aA][sS][kK]")
   ;; 2) ...
   ;; 3) then inputs:
   (block_mapping_pair
     key: (flow_node) @inputs_key
-    (#eq? @inputs_key "inputs")
+    (#match? @inputs_key "[iI][nN][pP][uU][tT][sS]")
     value: (block_node
       (block_mapping
         ;; 4) inside inputs: scriptType: inlineScript
         (block_mapping_pair
           key: (flow_node) @stype_key
-          (#eq? @stype_key "scriptType")
+          (#match? @stype_key "[sS][cC][rR][iI][pP][tT][tT][yY][pP][eE]")
           value: (flow_node) @stype_val)
-          (#eq? @stype_val "inlineScript")
+          (#match? @stype_val "[iI][nN][lL][iI][nN][eE][sS][cC][rR][iI][pP][tT]")
         ;; 5) later: inline: |  <block>
         (block_mapping_pair
           key: (flow_node) @inline_key
-          (#eq? @inline_key "inline")
+          (#match? @inline_key "[iI][nN][lL][iI][nN][eE]")
           value: (block_node
             (block_scalar) @injection.content
             (#set! injection.language "ps1")
@@ -31,7 +31,7 @@
 
 (block_mapping_pair
   key: (flow_node) @key
-  (#eq? @key "powershell")
+  (#match? @key "[pP][oO][wW][eE][rR][sS][hH][eE][lL][lL]|[pP][wW][sS][hH]")
   value: (block_node
     (block_scalar) @injection.content
     (#set! injection.language "ps1")
@@ -40,7 +40,7 @@
 
 (block_mapping_pair
   key: (flow_node) @key
-  (#eq? @key "bash")
+  (#match? @key "[bB][aA][sS][hH]")
   value: (block_node
     (block_scalar) @injection.content
     (#set! injection.language "bash")
