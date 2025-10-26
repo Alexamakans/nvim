@@ -35,11 +35,6 @@ do
   })
 end
 
-require("lsp_signature").setup({
-  close_timeout = 2000,
-  transparency = 100, -- this is actually opacity
-})
-
 local cmp = require("cmp")
 cmp.setup({
   sources = {

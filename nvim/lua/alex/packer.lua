@@ -49,6 +49,12 @@ return packer.startup(function(use)
   use({
     "ray-x/lsp_signature.nvim",
     tag = "v0.3.1",
+    config = function()
+      require("lsp_signature").setup({
+        close_timeout = 2000,
+        transparency = 100, -- this is actually opacity
+      })
+    end,
   })
 
   use("APZelos/blamer.nvim")
@@ -56,6 +62,22 @@ return packer.startup(function(use)
   use({
     "nvim-lualine/lualine.nvim",
     requires = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("lualine").setup({
+        options = {
+          icons_enabled = true,
+          theme = "auto",
+        },
+        sections = {
+          lualine_a = {},
+          lualine_b = { "branch", "diff", "diagnostics" },
+          lualine_c = { { "filename", path = 1 } },
+          lualine_x = {},
+          lualine_y = { "progress" },
+          lualine_z = { "location" },
+        },
+      })
+    end,
   })
 
   use({
@@ -80,6 +102,15 @@ return packer.startup(function(use)
     config = function()
       vim.cmd("colorscheme rose-pine")
     end,
+  })
+
+  use({
+    "ggandor/leap.nvim",
+    config = function()
+      vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap)")
+      vim.keymap.set("n", "S", "<Plug>(leap-from-window)")
+    end,
+    requires = "tpope/vim-repeat",
   })
 
   if PACKER_BOOTSTRAP then
