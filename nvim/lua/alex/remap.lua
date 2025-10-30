@@ -58,7 +58,6 @@ vim.keymap.set("n", "<leader>vrd", telescope_builtin.diagnostics, {})
 
 -- Diagnostics
 vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, { desc = "Line diagnostics" })
-vim.keymap.set("n", "<leader>qd", "<cmd>QuickfixDiagnostics<CR>")
 vim.keymap.set("n", "]d", function()
   vim.diagnostic.jump({ count = 1 })
 end, { desc = "Next diagnostic" })
