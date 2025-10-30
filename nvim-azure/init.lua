@@ -36,18 +36,37 @@ vim.list_extend(lsps, {
     name = "bicep",
   },
   {
+    name = "powershell_es",
+    config = {
+      bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services",
+      settings = {
+        powershell = {
+          codeFormatting = {
+            Preset = "OTBS",
+            AutoCorrectAliases = true,
+            AvoidSemiColonsAsLineTerminators = true,
+            UseCorrectCasing = true,
+            UseConstantStrings = false,
+          },
+        },
+      },
+    },
+  },
+  {
     tools = {
       mason = { "prettierd", "jsonlint", "yamllint" }, -- binaries to install with Mason
       formatters = {
         by_ft = {
           json = { "prettierd" },
           yaml = { "prettierd" },
+          powershell = { "powershell_es" },
         },
       },
       linters = {
         by_ft = {
           json = { "jsonlint" },
           yaml = { "yamllint" },
+          powershell = { "powershell_es" },
         },
       },
     },
