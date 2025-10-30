@@ -42,8 +42,8 @@ vim.keymap.set("n", "<leader>S", ":'<,'>s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><L
 vim.keymap.set("n", "<leader>h", "<cmd>noh<CR>")
 
 -- Move through quickfix list (:cnext, :cprev)
-vim.keymap.set("n", "<C-J>", "<cmd>cn<CR>")
-vim.keymap.set("n", "<C-K>", "<cmd>cp<CR>")
+vim.keymap.set("n", "<C-j>", "<cmd>cn<CR>")
+vim.keymap.set("n", "<C-k>", "<cmd>cp<CR>")
 
 -- Asterisk doesn't traverse the find list.
 -- I want it to function solely as a highlight keybind.
