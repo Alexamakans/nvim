@@ -1,4 +1,4 @@
-.PHONY: docs install
+.PHONY: docs install install-hard
 README := README.md
 
 # Collect directories named nvim-*/ (strip trailing / and sort for stable order)
