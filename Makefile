@@ -62,3 +62,17 @@ install:
 	    echo "Created symlink '$$src' -> '$$dst'"; \
 	  fi; \
 	done;
+
+install-hard:
+	@if [ ! -e "$${XDG_CONFIG_HOME:-$$HOME/.config}/nvim" ]; then \
+	  cp -r "$(CURDIR)/nvim" "$${XDG_CONFIG_HOME:-$$HOME/.config}/nvim"; \
+	  echo "Copied '$(CURDIR)/nvim' -> '$${XDG_CONFIG_HOME:-$$HOME/.config}/nvim'"; \
+	fi; \
+	for p in $(PROFILES); do \
+	  src="$(CURDIR)/$${p}" \
+	  dst="$${XDG_CONFIG_HOME:-$$HOME/.config}/$${p}"; \
+	  if [ ! -e "$$dst" ]; then \
+	    cp -r "$$src" "$$dst"; \
+	    echo "Copied '$$src' -> '$$dst'"; \
+	  fi; \
+	done;
