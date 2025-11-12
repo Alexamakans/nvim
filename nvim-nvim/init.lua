@@ -35,16 +35,18 @@ vim.list_extend(lsps, {
   },
   {
     tools = {
-      mason = { "prettierd", "markdownlint" },
+      mason = { "prettierd", "markdownlint", "luacheck", "stylua" },
       formatters = {
         by_ft = {
           markdown = { "markdownlint" },
           yaml = { "prettierd" },
+          lua = { "stylua" },
         },
       },
       linters = {
         by_ft = {
           markdown = { "markdownlint" },
+          lua = { "luacheck" },
         },
       },
     },
