@@ -57,12 +57,19 @@ require("mason").setup({})
 local lsps = require("shared.lsps")
 
 local ensure_servers = vim.tbl_map(function(s)
-  return s.name
-end, lsps)
+    return s.name
+  end, lsps)
+if os.getenv("NIXOS_NVIM") == "1" then
+require("mason-lspconfig").setup({
+  ensure_installed = {},
+  automatic_enable = true,
+})
+else
 require("mason-lspconfig").setup({
   ensure_installed = ensure_servers,
   automatic_enable = true,
 })
+end
 
 local caps = require("cmp_nvim_lsp").default_capabilities()
 
@@ -88,8 +95,10 @@ for _, s in ipairs(lsps) do
   local t = s.tools or {}
 
   -- collect mason tool names
-  for _, pkg in ipairs(t.mason or {}) do
-    table.insert(ensure_tools, pkg)
+  if os.getenv("NIXOS_NVIM") ~= "1" then
+    for _, pkg in ipairs(t.mason or {}) do
+      table.insert(ensure_tools, pkg)
+    end
   end
 
   -- merge conform formatters
@@ -120,8 +129,7 @@ for _, s in ipairs(lsps) do
   end
 end
 
--- Install tools at startup. If you don’t want this, skip this block.
--- Requires: 'WhoIsSethDaniel/mason-tool-installer.nvim'
+-- Install tools at startup.
 require("mason-tool-installer").setup({
   ensure_installed = ensure_tools,
   auto_update = false,

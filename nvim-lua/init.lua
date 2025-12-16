@@ -19,6 +19,21 @@ vim.list_extend(lsps, {
       },
     },
   },
+  {
+    tools = {
+      mason = { "luacheck", "stylua" },
+      formatters = {
+        by_ft = {
+          lua = { "stylua" },
+        },
+      },
+      linters = {
+        by_ft = {
+          lua = { "luacheck" },
+        },
+      },
+    },
+  },
 })
 
 dofile(vim.fs.joinpath(base_dir, "init.lua"))
