@@ -4,7 +4,7 @@ vim.opt.runtimepath:prepend(base_dir)
 local lsps = require("shared.lsps")
 local treesitters = require("shared.treesitters")
 
-vim.list_extend(treesitters, { "yaml", "json", "bicep", "powershell", "bash" })
+vim.list_extend(treesitters, { "yaml", "json", "bicep", "powershell", "bash", "javascript", "typescript" })
 
 vim.list_extend(lsps, {
   {
@@ -36,6 +36,9 @@ vim.list_extend(lsps, {
     name = "bicep",
   },
   {
+    name = "ts_ls",
+  },
+  {
     name = "powershell_es",
     config = {
       bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services",
@@ -60,6 +63,8 @@ vim.list_extend(lsps, {
           json = { "prettierd" },
           yaml = { "prettierd" },
           powershell = { "powershell_es" },
+          javascript = { "prettierd" },
+          typescript = { "prettierd" },
         },
       },
       linters = {
