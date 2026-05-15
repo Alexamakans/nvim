@@ -43,8 +43,7 @@ return packer.startup(function(use)
     requires = { "nvim-lua/plenary.nvim" },
   })
 
-  use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
-  use("nvim-treesitter/playground")
+  use({"nvim-treesitter/nvim-treesitter", branch="main", build = ":TSUpdate" })
 
   use({
     "ray-x/lsp_signature.nvim",
@@ -102,15 +101,6 @@ return packer.startup(function(use)
     config = function()
       vim.cmd("colorscheme rose-pine")
     end,
-  })
-
-  use({
-    "ggandor/leap.nvim",
-    config = function()
-      vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap)")
-      vim.keymap.set("n", "S", "<Plug>(leap-from-window)")
-    end,
-    requires = "tpope/vim-repeat",
   })
 
   if PACKER_BOOTSTRAP then
