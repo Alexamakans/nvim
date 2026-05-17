@@ -43,7 +43,7 @@ return packer.startup(function(use)
     requires = { "nvim-lua/plenary.nvim" },
   })
 
-  use("nvim-treesitter/nvim-treesitter")
+  use({ "nvim-treesitter/nvim-treesitter", branch = "main" })
 
   use({
     "ray-x/lsp_signature.nvim",

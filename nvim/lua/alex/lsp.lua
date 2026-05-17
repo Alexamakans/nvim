@@ -8,8 +8,18 @@ do
       local opts = { buffer = buf, silent = true }
 
       vim.keymap.set("n", "K", vim.lsp.buf.hover, vim.tbl_extend("keep", { desc = "Hover" }, opts))
-      vim.keymap.set("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("keep", { desc = "Goto definition" }, opts))
-      vim.keymap.set("n", "gD", vim.lsp.buf.declaration, vim.tbl_extend("keep", { desc = "Goto declaration" }, opts))
+      vim.keymap.set(
+        "n",
+        "gd",
+        vim.lsp.buf.definition,
+        vim.tbl_extend("keep", { desc = "Goto definition" }, opts)
+      )
+      vim.keymap.set(
+        "n",
+        "gD",
+        vim.lsp.buf.declaration,
+        vim.tbl_extend("keep", { desc = "Goto declaration" }, opts)
+      )
       vim.keymap.set(
         "n",
         "gi",
@@ -22,9 +32,24 @@ do
         vim.lsp.buf.type_definition,
         vim.tbl_extend("keep", { desc = "Goto type definition" }, opts)
       )
-      vim.keymap.set("n", "gr", vim.lsp.buf.references, vim.tbl_extend("keep", { desc = "List references" }, opts))
-      vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, vim.tbl_extend("keep", { desc = "Signature help" }, opts))
-      vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename, vim.tbl_extend("keep", { desc = "Rename symbol" }, opts))
+      vim.keymap.set(
+        "n",
+        "gr",
+        vim.lsp.buf.references,
+        vim.tbl_extend("keep", { desc = "List references" }, opts)
+      )
+      vim.keymap.set(
+        "n",
+        "gs",
+        vim.lsp.buf.signature_help,
+        vim.tbl_extend("keep", { desc = "Signature help" }, opts)
+      )
+      vim.keymap.set(
+        "n",
+        "<leader>vrn",
+        vim.lsp.buf.rename,
+        vim.tbl_extend("keep", { desc = "Rename symbol" }, opts)
+      )
       vim.keymap.set(
         "n",
         "<leader>vca",
@@ -57,18 +82,18 @@ require("mason").setup({})
 local lsps = require("shared.lsps")
 
 local ensure_servers = vim.tbl_map(function(s)
-    return s.name
-  end, lsps)
+  return s.name
+end, lsps)
 if os.getenv("NIXOS_NVIM") == "1" then
-require("mason-lspconfig").setup({
-  ensure_installed = {},
-  automatic_enable = true,
-})
+  require("mason-lspconfig").setup({
+    ensure_installed = {},
+    automatic_enable = true,
+  })
 else
-require("mason-lspconfig").setup({
-  ensure_installed = ensure_servers,
-  automatic_enable = true,
-})
+  require("mason-lspconfig").setup({
+    ensure_installed = ensure_servers,
+    automatic_enable = true,
+  })
 end
 
 local caps = require("cmp_nvim_lsp").default_capabilities()
