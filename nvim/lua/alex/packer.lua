@@ -39,11 +39,11 @@ return packer.startup(function(use)
 
   use({
     "nvim-telescope/telescope.nvim",
-    tag = "0.1.8",
+    branch = "master",
     requires = { "nvim-lua/plenary.nvim" },
   })
 
-  use({"nvim-treesitter/nvim-treesitter", branch="main", build = ":TSUpdate" })
+  use("nvim-treesitter/nvim-treesitter")
 
   use({
     "ray-x/lsp_signature.nvim",
@@ -84,14 +84,6 @@ return packer.startup(function(use)
   })
 
   use({
-    "ThePrimeagen/refactoring.nvim",
-    requires = {
-      { "nvim-lua/plenary.nvim" },
-      { "nvim-treesitter/nvim-treesitter" },
-    },
-  })
-
-  use({
     "mbbill/undotree",
   })
 
@@ -102,6 +94,29 @@ return packer.startup(function(use)
       vim.cmd("colorscheme rose-pine")
     end,
   })
+
+  -- use({
+  --   "greggh/claude-code.nvim",
+  --   requires = {
+  --     "nvim-lua/plenary.nvim",
+  --   },
+  --   config = function()
+  --     require("claude-code").setup({
+  --       window = {
+  --         split_ratio = 0.375,
+  --       },
+  --       keymaps = {
+  --         toggle = {
+  --           terminal = "<leader>cc",
+  --           variants = {
+  --             continue = "<leader>cC",
+  --             verbose = "<leader>cV",
+  --           },
+  --         },
+  --       },
+  --     })
+  --   end,
+  -- })
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()
