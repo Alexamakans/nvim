@@ -39,12 +39,12 @@ return packer.startup(function(use)
 
   use({
     "nvim-telescope/telescope.nvim",
-    tag = "0.1.8",
+    branch = "master",
     requires = { "nvim-lua/plenary.nvim" },
   })
 
-  use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
-  use("nvim-treesitter/playground")
+  use("nvim-treesitter/nvim-treesitter")
+  -- use("nvim-treesitter/playground")
 
   use({
     "ray-x/lsp_signature.nvim",
@@ -85,14 +85,6 @@ return packer.startup(function(use)
   })
 
   use({
-    "ThePrimeagen/refactoring.nvim",
-    requires = {
-      { "nvim-lua/plenary.nvim" },
-      { "nvim-treesitter/nvim-treesitter" },
-    },
-  })
-
-  use({
     "mbbill/undotree",
   })
 
@@ -105,12 +97,26 @@ return packer.startup(function(use)
   })
 
   use({
-    "ggandor/leap.nvim",
+    "greggh/claude-code.nvim",
+    requires = {
+      "nvim-lua/plenary.nvim",
+    },
     config = function()
-      vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap)")
-      vim.keymap.set("n", "S", "<Plug>(leap-from-window)")
+      require("claude-code").setup({
+        window = {
+          split_ratio = 0.375,
+        },
+        keymaps = {
+          toggle = {
+            terminal = "<leader>cc",
+            variants = {
+              continue = "<leader>cC",
+              verbose = "<leader>cV",
+            },
+          },
+        },
+      })
     end,
-    requires = "tpope/vim-repeat",
   })
 
   if PACKER_BOOTSTRAP then

@@ -1,7 +1,6 @@
 local treesitters = require("shared.treesitters")
 
-require("nvim-treesitter.configs").setup({
-  ensure_installed = treesitters,
+require("nvim-treesitter").setup({
   sync_install = false,
   auto_install = false,
 
@@ -29,3 +28,5 @@ require("nvim-treesitter.configs").setup({
     },
   },
 })
+
+require("nvim-treesitter").install(treesitters)
