@@ -72,6 +72,7 @@ _nv_guess_profile_from_markers() {
     [node]="package.json pnpm-lock.yaml yarn.lock"
     [ruby]="Gemfile"
     [php]="composer.json"
+    [android]="build.gradle.kts settings.gradle.kts"
   )
   local suf f
   for suf in "${!markers[@]}"; do
