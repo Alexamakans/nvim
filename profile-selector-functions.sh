@@ -68,7 +68,7 @@ _nv_guess_profile_from_markers() {
   declare -A markers=(
     [python]="pyproject.toml requirements.txt Pipfile poetry.lock uv.lock .venv venv"
     [golang]="go.mod go.sum"
-    [rust]="Cargo.toml"
+    [rust]="Cargo.toml Cargo.lock rust-toolchain.toml rust-toolchain"
     [node]="package.json pnpm-lock.yaml yarn.lock"
     [ruby]="Gemfile"
     [php]="composer.json"
