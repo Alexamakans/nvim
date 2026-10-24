@@ -7,7 +7,14 @@ do
       local buf = ev.buf
       local opts = { buffer = buf, silent = true }
 
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, vim.tbl_extend("keep", { desc = "Hover" }, opts))
+      vim.keymap.set("n", "K", function()
+        vim.lsp.buf.hover({
+          border = "rounded",
+          max_width = 120,
+          max_height = 55,
+        })
+      end, vim.tbl_extend("keep", { desc = "Hover" }, opts))
+
       vim.keymap.set(
         "n",
         "gd",

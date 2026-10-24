@@ -1,4 +1,6 @@
 require("alex.packer")
+require("alex.overrides")
+
 require("alex.settings")
 
 require("alex.graphics")
